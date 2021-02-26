@@ -13,7 +13,8 @@ export class CoursesService {
   constructor(private db: AngularFirestore) { }
 
   loadAllCourses(): Observable<Course[]> {
-    return this.db.collection('courses').snapshotChanges().pipe(map(snaps => {
+    return this.db.collection(
+      'courses', ref => ref.orderBy('seqNo')).snapshotChanges().pipe(map(snaps => {
       return snaps.map(snap => {
         return <Course> {
           id: snap.payload.doc.id,
