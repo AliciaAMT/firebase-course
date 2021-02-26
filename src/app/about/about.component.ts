@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Course } from 'app/model/course';
 
 
 @Component({
@@ -13,6 +14,21 @@ export class AboutComponent implements OnInit {
   constructor(private db: AngularFirestore) { }
 
   ngOnInit() {
-    this.db.collection('courses').valueChanges().subscribe(val=>console.log(val));
+    /*
+    this.db.collection('courses').snapshotChanges().subscribe(snaps=>{
+
+      console.log(snaps);
+
+
+      const courses: Course[] = snaps.map(snap => {
+
+        return <Course> {
+          id: snap.payload.doc.id,
+          ...snap.payload.doc.data() as Course
+        }
+      })
+      console.log(courses);
+
+    });   */
   }
 }
