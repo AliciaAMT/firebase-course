@@ -1,5 +1,5 @@
 import { Course } from './../model/course';
-import { map } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -18,8 +18,10 @@ export class CoursesService {
         return <Course> {
           id: snap.payload.doc.id,
           ...snap.payload.doc.data() as Course
-        }
+        };
       });
-    }));
+    }),
+    //end observable after first fetch
+      first());
   }
 }
