@@ -13,6 +13,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class HomeComponent implements OnInit {
 
     courses$ : Observable<Course[]>;
+    beginnersCourses$ : Observable<Course[]>;
+    advancedCourses$ : Observable<Course[]>;
 
     constructor(private db: AngularFirestore) {}
 
@@ -26,6 +28,20 @@ export class HomeComponent implements OnInit {
           }
         });
       }));
+
+      this.beginnersCourses$ = this.courses$.pipe(
+        map(courses => courses.filter(
+          course => course.categories.includes("BEGINNER")
+          )
+          )
+          );
+
+      this.advancedCourses$ = this.courses$.pipe(
+        map(courses => courses.filter(
+          course => course.categories.includes("ADVANCED")
+          )
+          )
+          );
 
     }
 }
