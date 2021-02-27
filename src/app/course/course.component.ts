@@ -1,3 +1,4 @@
+import { CoursesService } from './../services/courses.service';
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Course} from '../model/course';
@@ -14,14 +15,15 @@ import {Lesson} from '../model/lesson';
 export class CourseComponent implements OnInit {
 
   course: Course;
-
+  lessons: Lesson[];
   displayedColumns = ['seqNo', 'description', 'duration'];
 
   dataSource:any;
 
 
   constructor(
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private CoursesService: CoursesService) {
 
 
   }
@@ -30,7 +32,7 @@ export class CourseComponent implements OnInit {
 
     this.course = this.route.snapshot.data['course'];
 
-
+    this.CoursesService.findLessons(this.course.id).subscribe(lessons => this.lessons = lessons);
 
   }
 
