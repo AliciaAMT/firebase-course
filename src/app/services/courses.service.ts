@@ -16,6 +16,10 @@ export class CoursesService {
 
   constructor(private db: AngularFirestore) { }
 
+  saveCourse(courseId:string, changes: Partial<Course>): Observable<any> {
+    
+  }
+
   loadAllCourses(): Observable<Course[]> {
     return this.db.collection(
       'courses', ref => ref.orderBy("seqNo")).snapshotChanges().pipe(map(snaps => {
@@ -47,4 +51,5 @@ export class CoursesService {
       first()
     )
   }
+
 }
