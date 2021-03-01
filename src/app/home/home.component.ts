@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {Course} from "../model/course";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
     selector: 'home',
@@ -19,6 +20,10 @@ export class HomeComponent implements OnInit {
     constructor(private CoursesService: CoursesService) {}
 
     ngOnInit() {
+      this.reloadCourses();
+    }
+    reloadCourses() {
+
       this.courses$ = this.CoursesService.loadAllCourses();
 
       this.beginnersCourses$ = this.courses$.pipe(
