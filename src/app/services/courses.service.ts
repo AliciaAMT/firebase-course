@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Course} from '../model/course';
-import {from, Observable, of} from 'rxjs';
+import {from, Observable} from 'rxjs';
 import {first, map} from 'rxjs/operators';
 import {convertSnaps} from './db-utils';
 import {Lesson} from '../model/lesson';
@@ -16,8 +16,8 @@ export class CoursesService {
 
   constructor(private db: AngularFirestore) { }
 
-  saveCourse(courseId:string, changes: Partial<Course>): Observable<any> {
-    
+  saveCourse(courseId:string, changes:Partial<Course>):Observable<any>{
+    return from(this.db.doc(`courses/${courseId}`).update(changes));
   }
 
   loadAllCourses(): Observable<Course[]> {
