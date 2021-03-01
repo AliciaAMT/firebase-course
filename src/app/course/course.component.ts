@@ -16,6 +16,7 @@ export class CourseComponent implements OnInit {
 
   course: Course;
   lessons: Lesson[];
+  lastPageLoaded = 0;
   displayedColumns = ['seqNo', 'description', 'duration'];
 
   dataSource:any;
@@ -37,8 +38,7 @@ export class CourseComponent implements OnInit {
   }
 
   loadMore() {
-
+    this.lastPageLoaded++;
+    this.CoursesService.findLessons(this.course.id, 'asc', this.lastPageLoaded).subscribe(lessons => this.lessons = this.lessons.concat(lessons));
   }
-
-
 }
