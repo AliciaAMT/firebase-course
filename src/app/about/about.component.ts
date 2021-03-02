@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Course } from 'app/model/course';
 import { of } from 'rxjs';
-import { subscribeOn } from 'rxjs/operators';
+
 
 
 @Component({
