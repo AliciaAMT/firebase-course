@@ -40,6 +40,9 @@
             </button>
 
             <div class="filler"></div>
+            <ng-container *ngIf="(pictureUrl$ | async) as pictureUrl">
+              <img class="user-avatar" [src]="pictureUrl" alt="profile image">
+          </ng-container>
 
         </div>
 
